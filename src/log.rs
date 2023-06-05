@@ -22,9 +22,11 @@ pub async fn main() {
     fast_log::init(Config::new().console()).unwrap();
 
     let rb = RBatis::new();
-    rb.intercepts.clear();
 
     let l = Arc::new(LogInterceptor::new(LevelFilter::Info));
+    //first,clear old log intercept
+    rb.intercepts.clear();
+    //next add new intercept
     rb.intercepts.push(l.clone() as Arc<dyn Intercept>);
     //store to static
     _ = RB_LOG.set(l);
