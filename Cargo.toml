@@ -64,6 +64,9 @@ path = "src/pool_custom.rs"
 [[bin]]
 name = "log"
 path = "src/log.rs"
+[[bin]]
+name = "table_sync"
+path = "src/table_sync.rs"
 [dependencies]
 #serde and base types
 serde = { version = "1", features = ["derive"] }
