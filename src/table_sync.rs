@@ -36,15 +36,15 @@ pub async fn main() {
 
     let syncer = SqliteTableSync::default();
     syncer.sync(rb.acquire().await.unwrap(), to_value!(BizActivity {
-        id: Some("1".to_string()),
-        name: Some("1".to_string()),
-        pc_link: Some("1".to_string()),
-        h5_link: Some("1".to_string()),
-        pc_banner_img: Some("1".to_string()),
-        h5_banner_img: Some("1".to_string()),
-        sort: Some("1".to_string()),
+        id: Some("1".into()),
+        name: Some("1".into()),
+        pc_link: Some("1".into()),
+        h5_link: Some("1".into()),
+        pc_banner_img: Some("1".into()),
+        h5_banner_img: Some("1".into()),
+        sort: Some("1".into()),
         status: Some(1),
-        remark: Some("1".to_string()),
+        remark: Some("1".into()),
         create_time: Some(DateTime::now()),
         version: Some(1),
         delete_flag: Some(1),
