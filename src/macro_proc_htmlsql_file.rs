@@ -26,7 +26,7 @@ pub struct BizActivity {
     pub delete_flag: Option<i32>,
 }
 
-#[html_sql("example/example.html")]
+#[html_sql("example.html")]
 async fn select_by_condition(
     rb: &mut dyn Executor,
     name: &str,
