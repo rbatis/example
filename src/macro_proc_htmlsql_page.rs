@@ -25,7 +25,7 @@ pub struct BizActivity {
     pub delete_flag: Option<i32>,
 }
 
-htmlsql_select_page!(select_page_data(name: &str, dt: &DateTime) -> BizActivity => "example/example.html");
+htmlsql_select_page!(select_page_data(name: &str, dt: &DateTime) -> BizActivity => "example.html");
 
 #[tokio::main]
 pub async fn main() {
