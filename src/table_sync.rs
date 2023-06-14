@@ -35,7 +35,7 @@ pub async fn main() {
         .unwrap();
 
     let syncer = SqliteTableSync::default();
-    let table = BizActivity {
+    syncer.sync(rb.acquire().await.unwrap(), to_value!(BizActivity {
         id: Some("1".to_string()),
         name: Some("1".to_string()),
         pc_link: Some("1".to_string()),
@@ -48,6 +48,5 @@ pub async fn main() {
         create_time: Some(DateTime::now()),
         version: Some(1),
         delete_flag: Some(1),
-    };
-    syncer.sync(rb.acquire().await.unwrap(), to_value!(table), "biz_activity").await.unwrap();
+    }), "biz_activity").await.unwrap();
 }
