@@ -33,7 +33,7 @@ impl_select!(BizActivity{select_by_id(id:&str) -> Option => "`where id = #{id} l
 impl_update!(BizActivity{update_by_name(name:&str) => "`where id = '2'`"});
 impl_delete!(BizActivity {delete_by_name(name:&str) => "`where name= '2'`"});
 impl_select_page!(BizActivity{select_page() =>"
-     if !sql.contains('count'):
+     if !sql.contains('count(1)'):
        `order by create_time desc`"});
 impl_select_page!(BizActivity{select_page_by_name(name:&str) =>"
      if name != null && name != '':
