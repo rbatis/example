@@ -5,7 +5,6 @@ pub mod init;
 
 use crate::init::init_db;
 use rbatis::rbdc::datetime::DateTime;
-use rbatis::sql::page::PageRequest;
 use serde_json::json;
 
 /// table
@@ -58,9 +57,6 @@ pub async fn main() {
 
     let data = BizActivity::insert(&mut rb, &t).await;
     println!("insert = {}", json!(data));
-
-    let _data = BizActivity::delete_by_name(&mut rb, "2").await;
-    let _data = BizActivity::delete_by_name(&mut rb, "3").await;
 
     let data = BizActivity::insert_batch(&mut rb, &tables, 10).await;
     println!("insert_batch = {}", json!(data));
