@@ -26,6 +26,21 @@ path = "src/macro_proc_rawsql.rs"
 name = "crud"
 path = "src/crud.rs"
 [[bin]]
+name = "crud_insert"
+path = "src/crud_insert.rs"
+[[bin]]
+name = "crud_delete"
+path = "src/crud_delete.rs"
+[[bin]]
+name = "crud_select"
+path = "src/crud_select.rs"
+[[bin]]
+name = "crud_select_page"
+path = "src/crud_select_page.rs"
+[[bin]]
+name = "crud_update"
+path = "src/crud_update.rs"
+[[bin]]
 name = "crud_map"
 path = "src/crud_map.rs"
 [[bin]]

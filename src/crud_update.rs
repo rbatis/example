@@ -24,10 +24,7 @@ pub struct BizActivity {
     pub delete_flag: Option<i32>,
 }
 
-//custom table name
-//crud!(BizActivity {},"biz_activity");
-//crud! = impl_insert!($table {});impl_select!($table {});impl_update!($table {});impl_delete!($table {});
-crud!(BizActivity {});
+impl_update!(BizActivity{update_by_name(name:&str) => "`where id = '2'`"});
 
 #[tokio::main]
 pub async fn main() {
@@ -38,7 +35,8 @@ pub async fn main() {
     )
     .expect("rbatis init fail");
     let mut rb = init_db().await;
-    let t = BizActivity {
+
+    let table = BizActivity {
         id: Some("2".into()),
         name: Some("2".into()),
         pc_link: Some("2".into()),
@@ -52,30 +50,7 @@ pub async fn main() {
         version: Some(1),
         delete_flag: Some(1),
     };
-    let tables = [t.clone(), {
-        let mut t3 = t.clone();
-        t3.id = "3".to_string().into();
-        t3
-    }];
 
-    let data = BizActivity::insert(&mut rb, &t).await;
-    println!("insert = {}", json!(data));
-
-    let data = BizActivity::insert_batch(&mut rb, &tables, 10).await;
-    println!("insert_batch = {}", json!(data));
-
-    let data = BizActivity::update_by_column_batch(&mut rb, &tables, "id").await;
-    println!("update_by_column_batch = {}", json!(data));
-
-    let data = BizActivity::update_by_column(&mut rb, &t, "id").await;
-    println!("update_by_column = {}", json!(data));
-
-    let data = BizActivity::delete_by_column(&mut rb, "id", "2").await;
-    println!("delete_by_column = {}", json!(data));
-
-    let data = BizActivity::select_in_column(&mut rb, "id", &["1", "2", "3"]).await;
-    println!("select_in_column = {}", json!(data));
-
-    let data = BizActivity::delete_in_column(&mut rb, "id", &["1", "2", "3"]).await;
-    println!("delete_in_column = {}", json!(data));
+    let data = BizActivity::update_by_name(&mut rb, &table, "2").await;
+    println!("update_by_name = {}", json!(data));
 }

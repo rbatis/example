@@ -5,6 +5,7 @@ pub mod init;
 
 use crate::init::init_db;
 use rbatis::rbdc::datetime::DateTime;
+use rbatis::sql::page::PageRequest;
 use serde_json::json;
 
 /// table
@@ -24,10 +25,7 @@ pub struct BizActivity {
     pub delete_flag: Option<i32>,
 }
 
-//custom table name
-//crud!(BizActivity {},"biz_activity");
-//crud! = impl_insert!($table {});impl_select!($table {});impl_update!($table {});impl_delete!($table {});
-crud!(BizActivity {});
+impl_insert!(BizActivity{});
 
 #[tokio::main]
 pub async fn main() {
@@ -61,21 +59,9 @@ pub async fn main() {
     let data = BizActivity::insert(&mut rb, &t).await;
     println!("insert = {}", json!(data));
 
+    let _data = BizActivity::delete_by_name(&mut rb, "2").await;
+    let _data = BizActivity::delete_by_name(&mut rb, "3").await;
+
     let data = BizActivity::insert_batch(&mut rb, &tables, 10).await;
     println!("insert_batch = {}", json!(data));
-
-    let data = BizActivity::update_by_column_batch(&mut rb, &tables, "id").await;
-    println!("update_by_column_batch = {}", json!(data));
-
-    let data = BizActivity::update_by_column(&mut rb, &t, "id").await;
-    println!("update_by_column = {}", json!(data));
-
-    let data = BizActivity::delete_by_column(&mut rb, "id", "2").await;
-    println!("delete_by_column = {}", json!(data));
-
-    let data = BizActivity::select_in_column(&mut rb, "id", &["1", "2", "3"]).await;
-    println!("select_in_column = {}", json!(data));
-
-    let data = BizActivity::delete_in_column(&mut rb, "id", &["1", "2", "3"]).await;
-    println!("delete_in_column = {}", json!(data));
 }
