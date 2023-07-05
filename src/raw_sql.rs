@@ -31,12 +31,13 @@ pub async fn main() {
         .query_decode("select * from biz_activity limit ?", vec![to_value!(1)])
         .await
         .unwrap();
+    log::logger().flush();
+    println!(">>>>> table={}", json!(table));
     //exec
     let result = rb
         .exec("update biz_activity set status = 0 where id > 0", vec![])
         .await
         .unwrap();
     log::logger().flush();
-    println!(">>>>> table={}", json!(table));
     println!(">>>>> exec={}", result);
 }
